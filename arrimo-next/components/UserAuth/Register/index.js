@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Input } from "antd";
 
 const Register = () => {
   const [registrationForm] = Form.useForm();
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+
   return (
     <div>
-      <h2 className="text-center mb-5">Registration Form</h2>
+      <h2 className="text-center">Register your account</h2>
+      <p className="text-center mb-5">
+        Please enter your details to complete the registration process.
+      </p>
       <Form
         form={registrationForm}
         name="registration"
@@ -21,11 +23,7 @@ const Register = () => {
         wrapperCol={{
           span: 16,
         }}
-        initialValues={{
-          remember: true,
-        }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item

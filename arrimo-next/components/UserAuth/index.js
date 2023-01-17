@@ -2,6 +2,7 @@ import React from "react";
 import { Tabs } from "antd";
 import Login from "./Login";
 import Register from "./Register";
+import Image from "next/image";
 
 const UserAuth = () => {
   const onChange = (key) => {
@@ -20,7 +21,26 @@ const UserAuth = () => {
     },
   ];
   return (
-    <Tabs className="" defaultActiveKey="1" items={items} onChange={onChange} />
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-5 d-none  d-lg-block">
+          <Image
+            src="/assets/images/login.svg"
+            alt="Login Picture"
+            width={500}
+            height={500}
+          />
+        </div>
+        <div className="col-md-7 ">
+          <Tabs
+            className=""
+            defaultActiveKey="1"
+            items={items}
+            onChange={onChange}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 

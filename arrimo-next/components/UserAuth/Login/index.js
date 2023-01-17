@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Form, Input } from "antd";
 
 const Login = () => {
   const [loginForm] = Form.useForm();
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+
   return (
     <div>
       <h2 className="text-center">Welcome Back</h2>
@@ -25,11 +24,7 @@ const Login = () => {
         wrapperCol={{
           span: 16,
         }}
-        initialValues={{
-          remember: true,
-        }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item

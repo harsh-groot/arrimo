@@ -2,8 +2,15 @@ import Head from "next/head";
 import Layout from "../components/Layout";
 import Image from "next/image";
 import UserAuth from "../components/UserAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Home = () => {
+  const user = useSelector((user) => user);
+
+  useEffect(() => {
+    console.log("user :>> ", user);
+  }, [user]);
   return (
     <>
       <Head>
@@ -12,21 +19,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-5 d-none  d-lg-block">
-            <Image
-              src="/assets/images/login.svg"
-              alt="Login Picture"
-              width={500}
-              height={500}
-            />
-          </div>
-          <div className="col-md-7 ">
-            <UserAuth />
-          </div>
-        </div>
-      </div>
+      <UserAuth />
     </>
   );
 };
