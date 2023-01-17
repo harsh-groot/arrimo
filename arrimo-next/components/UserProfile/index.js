@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import TableComponent from "./TableComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { users } from "../../thunks/userThunk";
-import { Modal, Button, Form, Input } from "antd";
+import { Modal, Button, Form, Input, Popconfirm } from "antd";
 import { registration } from "../../thunks/userThunk";
 import { httpDeleteUser, httpUpdateUser } from "../../requests/auth";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const UserProfile = () => {
   const [allUsers, setUsers] = useState();
+  const [loginedUsers, setLoginedUsers] = useState();
+
   const [currentUser, setCurrentUsers] = useState();
 
   const [isModalOpen, setIsModalOpen] = useState({
@@ -60,6 +63,12 @@ const UserProfile = () => {
     dispatch(users()).then((res) => {
       setUsers(res?.payload?.data);
     });
+
+    if (window && window.localStorage) {
+      const loginUser = localStorage.getItem("USER");
+      const _loginUser = JSON.parse(loginUser);
+      setLoginedUsers(_loginUser);
+    }
   }, []);
 
   const onAddUser = () => {
@@ -124,18 +133,19 @@ const UserProfile = () => {
           <button
             type="button"
             className="btn btn-link"
-            onClick={() => onUserDelete(record)}
-          >
-            Delete
-          </button>
-
-          <button
-            type="button"
-            className="btn btn-link"
             onClick={() => onUserUpdate(record)}
           >
-            Update
+            <EditOutlined />
           </button>
+          {loginedUsers?.id !== record?._id && (
+            <button
+              type="button"
+              className="btn btn-link"
+              onClick={() => onUserDelete(record)}
+            >
+              <DeleteOutlined />
+            </button>
+          )}
         </>
       ),
     },
