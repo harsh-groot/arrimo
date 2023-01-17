@@ -1,16 +1,11 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import Image from "next/image";
 import UserAuth from "../components/UserAuth";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const Home = () => {
-  const user = useSelector((user) => user);
-
-  useEffect(() => {
-    console.log("user :>> ", user);
-  }, [user]);
   return (
     <>
       <Head>
@@ -18,8 +13,6 @@ const Home = () => {
         <meta name="description" content="Generated Arroimo App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <UserAuth />
     </>
   );
 };

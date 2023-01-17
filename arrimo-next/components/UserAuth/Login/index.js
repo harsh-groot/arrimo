@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../thunks/userThunk";
+import { useRouter } from "next/dist/client/router";
 
 const Login = () => {
   const [loginForm] = Form.useForm();
   const dispatch = useDispatch();
-
+  const router = useRouter();
   useEffect(() => {
     loginForm.resetFields();
   }, []);
@@ -15,6 +16,10 @@ const Login = () => {
     console.log("Success:", values);
     dispatch(login(values)).then((res) => {
       console.log("dispatch login res :>>", res);
+      if(res?.payload?.user?.confirmed){
+        localStorage.setItem('ACCESS_TOKEN', res?.payload?.jwt);
+        router.push('/users')
+      }
       loginForm.resetFields();
     });
   };

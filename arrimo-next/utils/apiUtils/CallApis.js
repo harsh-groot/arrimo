@@ -60,7 +60,7 @@ export const callApi = ({
 
         if (err?.response?.status === 401) {
           // Unauthorized
-          localStorage.setItem("isLoggedIn", "false");
+
           reject(err.response);
         }
         reject(err.response);

@@ -1,5 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { httpRegisterUser, httpLoginUser, httpMeUser } from "../requests/auth";
+import {
+  httpRegisterUser,
+  httpLoginUser,
+  httpMeUser,
+  httpGetUser,
+} from "../requests/auth";
 
 import {
   clearUserInfoFromLocalStorage,
@@ -48,8 +53,6 @@ export const login = createAsyncThunk(
         return rejectWithValue(response?.data);
       }
 
-      console.log("response :>> ", response);
-
       const result = jwt
         ? {
             jwt,
@@ -72,3 +75,7 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk("user/logout", async () =>
   clearUserInfoFromLocalStorage()
 );
+
+export const users = createAsyncThunk("user/users", async () => {
+  return await httpGetUser();
+});

@@ -34,3 +34,30 @@ export const httpMeUser = async (jwt) => {
     },
   });
 };
+
+export const httpGetUser = async () => {
+  return await callApi({
+    uriEndPoint: {
+      ...endPoints.users,
+    },
+  });
+};
+
+export const httpDeleteUser = async (payload) => {
+  console.log("payload :>> ", payload);
+  return await callApi({
+    uriEndPoint: {
+      ...endPoints.deleteUser,
+    },
+    ...payload,
+  });
+};
+
+export const httpUpdateUser = async (payload) => {
+  return await callApi({
+    uriEndPoint: {
+      ...endPoints.updateUser,
+    },
+    ...payload,
+  });
+};
