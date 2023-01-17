@@ -1,11 +1,22 @@
 import React, { useEffect } from "react";
 import { Button, Form, Input } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../thunks/userThunk";
 
 const Login = () => {
   const [loginForm] = Form.useForm();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    loginForm.resetFields();
+  }, []);
 
   const onFinish = (values) => {
     console.log("Success:", values);
+    dispatch(login(values)).then((res) => {
+      console.log("dispatch login res :>>", res);
+      loginForm.resetFields();
+    });
   };
 
   return (
